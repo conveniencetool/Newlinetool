@@ -3,46 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>URL変換・共有リンク生成ツール</title>
+    <title>高性能URL変換 & Unicode解析ツール</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>URL変換・共有リンク生成ツール</h1>
-        <p>LINEリンクを入力し、指定された形式に変換し、共有リンクを生成します。</p>
-
-        <input type="text" id="urlInput" placeholder="LINEのURLを入力してください">
-
-        <div class="linkType">
-            <label>
-                <input type="radio" name="linkType" value="report" checked>
-                通報リンク
-            </label>
-            <label>
-                <input type="radio" name="linkType" value="join">
-                参加リンク
-            </label>
-            <label>
-                <input type="radio" name="linkType" value="invite">
-                招待リンク
-            </label>
-            <label>
-                <input type="radio" name="linkType" value="browser">
-                ブラウザ用リンク
-            </label>
-        </div>
-
-        <button onclick="convertUrl()">変換する</button>
-
-        <h3>変換結果:</h3>
-        <div id="result" class="output"></div>
-
-        <button id="copyButton" onclick="copyLink()" style="display:none;">リンクをコピー</button>
-
-        <h3>共有リンク:</h3>
-        <div id="shareLink" class="output"></div>
+        <h1>多機能URL変換 & Unicode解析ツール</h1>
         
-        <button id="copyShareButton" onclick="copyShareLink()" style="display:none;">共有リンクをコピー</button>
+        <!-- URL変換ツール -->
+        <section>
+            <h2>URL変換ツール</h2>
+            <input type="text" id="urlInput" placeholder="LINEのURLを入力してください">
+            <div class="linkType">
+                <label><input type="radio" name="linkType" value="report" checked> 通報リンク</label>
+                <label><input type="radio" name="linkType" value="join"> 参加リンク</label>
+                <label><input type="radio" name="linkType" value="invite"> 招待リンク</label>
+                <label><input type="radio" name="linkType" value="browser"> ブラウザ用リンク</label>
+            </div>
+            <button onclick="convertUrl()">変換する</button>
+            <div id="result" class="output"></div>
+            <button id="copyButton" onclick="copyLink()" style="display:none;">リンクをコピー</button>
+        </section>
+
+        <!-- 共有リンク作成ツール -->
+        <section>
+            <h2>共有リンク作成</h2>
+            <input type="text" id="shareLinkInput" placeholder="生成されたリンクを入力">
+            <button onclick="generateShareLink()">共有リンクを生成</button>
+            <div id="shareLinkOutput" class="output"></div>
+            <button id="copyShareButton" onclick="copyShareLink()" style="display:none;">共有リンクをコピー</button>
+        </section>
+        
+        <!-- Unicode解析ツール -->
+        <section>
+            <h2>Unicode解析ツール</h2>
+            <input type="text" id="unicodeInput" placeholder="解析するテキストを入力">
+            <button onclick="analyzeUnicode()">解析する</button>
+            <div id="unicodeResult" class="output"></div>
+        </section>
 
         <h4 class="disclaimer">注意: このツールの使用によって生じた問題について、開発者は一切の責任を負いません。</h4>
     </div>
