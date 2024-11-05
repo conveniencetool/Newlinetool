@@ -48,6 +48,11 @@ input::placeholder {
     color: #666;
 }
 
+.linkType {
+    margin: 15px 0;
+    color: #bbb;
+}
+
 button {
     width: 100%;
     padding: 12px;
