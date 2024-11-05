@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>次世代型 URL変換・共有リンク生成ツール</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>次世代型 URL変換・共有リンク生成ツール</h1>
+        <p>LINEリンクを入力し、指定された形式に変換し、共有リンクを生成します。</p>
+
+        <input type="text" id="urlInput" placeholder="LINEのURLを入力してください">
+        <button onclick="convertUrl()">変換する</button>
+
+        <h3>変換結果:</h3>
+        <div id="result" class="output"></div>
+
+        <h3>共有リンク:</h3>
+        <div id="shareLink" class="output"></div>
+
+        <button id="copyButton" onclick="copyLink()" style="display:none;">リンクをコピー</button>
+
+        <h4 class="disclaimer">注意: このツールの使用によって生じた問題について、開発者は一切の責任を負いません。</h4>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
