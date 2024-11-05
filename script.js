@@ -13,7 +13,7 @@ function convertUrl() {
 
     if (match && match[1]) {
         const ticket = match[1];
-        
+
         // 変換結果を生成
         const results = [
             `line://square/report?ticket=${ticket}`,
@@ -26,9 +26,6 @@ function convertUrl() {
         results.forEach(result => {
             resultDiv.innerHTML += `<div>${result}</div>`;
         });
-
-        // チケットも表示
-        resultDiv.innerHTML += `<strong>チケット:</strong> ${ticket}`;
 
         // 共有リンク生成
         const shareLink = `https://example.com/share?ticket=${ticket}`; // 共有リンクの例
