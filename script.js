@@ -1,25 +1,16 @@
 function convertUrl() {
     const inputUrl = document.getElementById('urlInput').value;
     const resultDiv = document.getElementById('result');
-    const shareLinkDiv = document.getElementById('shareLink');
     const copyButton = document.getElementById('copyButton');
-    const copyShareButton = document.getElementById('copyShareButton');
-    
-    resultDiv.innerHTML = ''; // 既存の結果をクリア
-    shareLinkDiv.innerHTML = ''; // 共有リンクをクリア
-    copyButton.style.display = 'none'; // ボタンを非表示に
-    copyShareButton.style.display = 'none'; // 共有リンクコピーを非表示に
 
-    // 正規表現でURLからチケット部分を抽出
     const regex = /ti\/g2\/([^?]+)/;
     const match = inputUrl.match(regex);
 
     if (match && match[1]) {
         const ticket = match[1];
         const linkType = document.querySelector('input[name="linkType"]:checked').value;
-
-        // 選択されたリンク形式に応じて変換結果を生成
         let resultUrl;
+        
         switch (linkType) {
             case "report":
                 resultUrl = `line://square/report?ticket=${ticket}`;
@@ -35,37 +26,39 @@ function convertUrl() {
                 break;
         }
 
-        // 変換結果の表示
-        resultDiv.innerHTML = `<div>${resultUrl}</div>`;
-        copyButton.style.display = 'block'; // ボタンを表示
-
-        // 共有リンクの生成（ここでは一例として共有リンクの構成を簡単にしています）
-        const shareUrl = `https://example.com/share?generatedLink=${encodeURIComponent(resultUrl)}`;
-        shareLinkDiv.innerHTML = `<div>${shareUrl}</div>`;
-        copyShareButton.style.display = 'block'; // 共有リンクコピーを表示
+        resultDiv.innerHTML = resultUrl;
+        copyButton.style.display = 'block';
     } else {
-        resultDiv.innerHTML = '無効なURLです。正しい形式で入力してください。';
+        resultDiv.innerHTML = '無効なURLです。';
     }
 }
 
 function copyLink() {
-    const resultDiv = document.getElementById('result');
-    const textArea = document.createElement('textarea');
-    textArea.value = resultDiv.textContent;
-    document.body.appendChild(textArea);
-    textArea.select();
-    document.execCommand('copy');
-    document.body.removeChild(textArea);
-    alert('リンクがコピーされました！');
+    const text = document.getElementById('result').textContent;
+    navigator.clipboard.writeText(text).then(() => alert('リンクがコピーされました！'));
+}
+
+function generateShareLink() {
+    const link = document.getElementById('shareLinkInput').value;
+    const shareLinkDiv = document.getElementById('shareLinkOutput');
+    shareLinkDiv.innerHTML = `https://example.com/share?link=${encodeURIComponent(link)}`;
+    document.getElementById('copyShareButton').style.display = 'block';
 }
 
 function copyShareLink() {
-    const shareLinkDiv = document.getElementById('shareLink');
-    const textArea = document.createElement('textarea');
-    textArea.value = shareLinkDiv.textContent;
-    document.body.appendChild(textArea);
-    textArea.select();
-    document.execCommand('copy');
-    document.body.removeChild(textArea);
-    alert('共有リンクがコピーされました！');
+    const text = document.getElementById('shareLinkOutput').textContent;
+    navigator.clipboard.writeText(text).then(() => alert('共有リンクがコピーされました！'));
+}
+
+function analyzeUnicode() {
+    const text = document.getElementById('unicodeInput').value;
+    const unicodeResultDiv = document.getElementById('unicodeResult');
+    let output = 'Unicode解析結果:<br>';
+    
+    for (const char of text) {
+        const codePoint = char.codePointAt(0).toString(16).toUpperCase();
+        output += `${char} -> U+${codePoint}<br>`;
+    }
+
+    unicodeResultDiv.innerHTML = output;
 }
