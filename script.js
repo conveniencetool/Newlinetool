@@ -13,19 +13,11 @@ function convertUrl() {
 
     if (match && match[1]) {
         const ticket = match[1];
+        const linkType = document.querySelector('input[name="linkType"]:checked').value;
 
         // 変換結果を生成
-        const results = [
-            `line://square/report?ticket=${ticket}`,
-            `line://square/join?ticket=${ticket}`,
-            `line://square/ti/g2/${ticket}`,
-            `https://square-api.line.me/smw/v2/static/sm/html/#/squareCover/${ticket}`
-        ];
-
-        // 結果を表示
-        results.forEach(result => {
-            resultDiv.innerHTML += `<div>${result}</div>`;
-        });
+        const resultUrl = `line://square/${linkType}?ticket=${ticket}`;
+        resultDiv.innerHTML = `<div>${resultUrl}</div>`;
 
         // 共有リンク生成
         const shareLink = `https://example.com/share?ticket=${ticket}`; // 共有リンクの例
