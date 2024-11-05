@@ -8,7 +8,7 @@ function convertUrl() {
     copyButton.style.display = 'none'; // ボタンを非表示に
 
     // 正規表現を使用してURLからチケット部分を抽出
-    const regex = /ticket=([^&]+)/;
+    const regex = /ti\/g2\/([^?]+)/; // g2の後の部分を抽出
     const match = inputUrl.match(regex);
 
     if (match && match[1]) {
