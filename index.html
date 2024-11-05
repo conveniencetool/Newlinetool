@@ -12,6 +12,18 @@
         <p>LINEリンクを入力し、指定された形式に変換し、共有リンクを生成します。</p>
 
         <input type="text" id="urlInput" placeholder="LINEのURLを入力してください">
+
+        <div class="linkType">
+            <label>
+                <input type="radio" name="linkType" value="report" checked>
+                通報リンク
+            </label>
+            <label>
+                <input type="radio" name="linkType" value="join">
+                参加リンク
+            </label>
+        </div>
+
         <button onclick="convertUrl()">変換する</button>
 
         <h3>変換結果:</h3>
