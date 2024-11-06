@@ -1,65 +1,66 @@
-function convertUrl() {
-    const inputUrl = document.getElementById('urlInput').value;
-    const resultDiv = document.getElementById('result');
-    const copyButton = document.getElementById('copyButton');
-
-    const regex = /ti\/g2\/([^?]+)/;
-    const match = inputUrl.match(regex);
-
-    if (match && match[1]) {
-        const ticket = match[1];
-        const linkType = document.querySelector('input[name="linkType"]:checked').value;
-        let resultUrl;
-        
-        switch (linkType) {
-            case "report":
-                resultUrl = `line://square/report?ticket=${ticket}`;
-                break;
-            case "join":
-                resultUrl = `line://square/join?ticket=${ticket}`;
-                break;
-            case "invite":
-                resultUrl = `line://square/ti/g2/${ticket}`;
-                break;
-            case "browser":
-                resultUrl = `https://square-api.line.me/smw/v2/static/sm/html/#/squareCover/${ticket}`;
-                break;
-        }
-
-        resultDiv.innerHTML = resultUrl;
-        copyButton.style.display = 'block';
-    } else {
-        resultDiv.innerHTML = '無効なURLです。';
-    }
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
 }
 
-function copyLink() {
-    const text = document.getElementById('result').textContent;
-    navigator.clipboard.writeText(text).then(() => alert('リンクがコピーされました！'));
+.container {
+    text-align: center;
+    max-width: 360px;
+    width: 90%;
+    padding: 20px;
+    background-color: #111;
+    border: 1px solid #333;
+    border-radius: 8px;
 }
 
-function generateShareLink() {
-    const shareContent = document.getElementById('shareLinkInput').value;
-    const shareLinkDiv = document.getElementById('shareLinkOutput');
-    const shareUrl = `https://line.me/R/msg/text/${encodeURIComponent(shareContent)}`;
-    shareLinkDiv.innerHTML = shareUrl;
-    document.getElementById('copyShareButton').style.display = 'block';
+h1, h2 {
+    color: #fff;
+    margin: 10px 0;
 }
 
-function copyShareLink() {
-    const text = document.getElementById('shareLinkOutput').textContent;
-    navigator.clipboard.writeText(text).then(() => alert('共有リンクがコピーされました！'));
+input {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    background-color: #222;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 5px;
 }
 
-function analyzeUnicode() {
-    const text = document.getElementById('unicodeInput').value;
-    const unicodeResultDiv = document.getElementById('unicodeResult');
-    let output = 'Unicode解析結果:<br>';
-    
-    for (const char of text) {
-        const codePoint = char.codePointAt(0).toString(16).toUpperCase();
-        output += `${char} -> U+${codePoint}<br>`;
-    }
+button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    color: #fff;
+    background-color: #333;
+    border: 1px solid #555;
+    cursor: pointer;
+    transition: background 0.3s;
+}
 
-    unicodeResultDiv.innerHTML = output;
+button:hover {
+    background-color: #555;
+}
+
+.output {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #222;
+    border-radius: 5px;
+    color: #0f0;
+    font-size: 0.85em;
+    word-wrap: break-word;
+}
+
+.disclaimer {
+    font-size: 0.7em;
+    color: #888;
+    margin-top: 10px;
 }
