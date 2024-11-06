@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>高性能URL変換 & Unicode解析ツール</title>
+    <title>URL変換 & Unicode解析ツール</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>多機能URL変換 & Unicode解析ツール</h1>
+        <h1>URL変換 & Unicode解析ツール</h1>
         
         <!-- URL変換ツール -->
-        <section>
+        <section class="tool-section">
             <h2>URL変換ツール</h2>
             <input type="text" id="urlInput" placeholder="LINEのURLを入力してください">
             <div class="linkType">
@@ -26,23 +26,23 @@
         </section>
 
         <!-- 共有リンク作成ツール -->
-        <section>
+        <section class="tool-section">
             <h2>共有リンク作成</h2>
-            <input type="text" id="shareLinkInput" placeholder="生成されたリンクを入力">
+            <input type="text" id="shareLinkInput" placeholder="共有する内容を入力">
             <button onclick="generateShareLink()">共有リンクを生成</button>
             <div id="shareLinkOutput" class="output"></div>
             <button id="copyShareButton" onclick="copyShareLink()" style="display:none;">共有リンクをコピー</button>
         </section>
         
         <!-- Unicode解析ツール -->
-        <section>
+        <section class="tool-section">
             <h2>Unicode解析ツール</h2>
             <input type="text" id="unicodeInput" placeholder="解析するテキストを入力">
             <button onclick="analyzeUnicode()">解析する</button>
             <div id="unicodeResult" class="output"></div>
         </section>
 
-        <h4 class="disclaimer">注意: このツールの使用によって生じた問題について、開発者は一切の責任を負いません。</h4>
+        <p class="disclaimer">注意: このツールの使用によって生じた問題について、開発者は一切の責任を負いません。</p>
     </div>
 
     <script src="script.js"></script>
