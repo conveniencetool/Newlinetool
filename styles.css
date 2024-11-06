@@ -1,108 +1,65 @@
-body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    background-color: #000;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    padding: 10px; /* スマホでも全体が収まるようにパディングを調整 */
-}
+function convertUrl() {
+    const inputUrl = document.getElementById('urlInput').value;
+    const resultDiv = document.getElementById('result');
+    const copyButton = document.getElementById('copyButton');
 
-.container {
-    text-align: center;
-    max-width: 350px; /* 幅を縮小してスマホ対応 */
-    width: 100%;
-    padding: 20px;
-    background-color: #111;
-    border: 2px solid #444;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-}
+    const regex = /ti\/g2\/([^?]+)/;
+    const match = inputUrl.match(regex);
 
-h1 {
-    font-size: 1.5em; /* タイトルのフォントサイズを縮小 */
-    color: #fff;
-    margin-bottom: 10px;
-}
+    if (match && match[1]) {
+        const ticket = match[1];
+        const linkType = document.querySelector('input[name="linkType"]:checked').value;
+        let resultUrl;
+        
+        switch (linkType) {
+            case "report":
+                resultUrl = `line://square/report?ticket=${ticket}`;
+                break;
+            case "join":
+                resultUrl = `line://square/join?ticket=${ticket}`;
+                break;
+            case "invite":
+                resultUrl = `line://square/ti/g2/${ticket}`;
+                break;
+            case "browser":
+                resultUrl = `https://square-api.line.me/smw/v2/static/sm/html/#/squareCover/${ticket}`;
+                break;
+        }
 
-p {
-    font-size: 0.9em; /* 説明文のフォントサイズを縮小 */
-    color: #bbb;
-}
-
-input {
-    width: 100%;
-    padding: 10px; /* 入力欄のパディングを調整 */
-    margin: 8px 0;
-    font-size: 0.9em;
-    color: #fff;
-    background-color: #222;
-    border: 1px solid #555;
-    border-radius: 5px;
-    outline: none;
-}
-
-input::placeholder {
-    color: #666;
-}
-
-.linkType {
-    margin: 10px 0;
-    color: #bbb;
-}
-
-button {
-    width: 100%;
-    padding: 10px;
-    font-size: 0.9em;
-    color: #fff;
-    background-color: #333;
-    border: 2px solid #666;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s, border-color 0.3s;
-}
-
-button:hover {
-    background-color: #555;
-    border-color: #aaa;
-}
-
-.output {
-    text-align: left;
-    margin-top: 15px;
-    background-color: #222;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #555;
-    color: #0f0;
-    word-wrap: break-word;
-    font-size: 0.9em;
-}
-
-.disclaimer {
-    color: #bbb;
-    font-size: 0.7em; /* 注意書きのフォントサイズを縮小 */
-    margin-top: 15px;
-}
-
-@media (max-width: 600px) {
-    body {
-        padding: 5px;
+        resultDiv.innerHTML = resultUrl;
+        copyButton.style.display = 'block';
+    } else {
+        resultDiv.innerHTML = '無効なURLです。';
     }
+}
+
+function copyLink() {
+    const text = document.getElementById('result').textContent;
+    navigator.clipboard.writeText(text).then(() => alert('リンクがコピーされました！'));
+}
+
+function generateShareLink() {
+    const shareContent = document.getElementById('shareLinkInput').value;
+    const shareLinkDiv = document.getElementById('shareLinkOutput');
+    const shareUrl = `https://line.me/R/msg/text/${encodeURIComponent(shareContent)}`;
+    shareLinkDiv.innerHTML = shareUrl;
+    document.getElementById('copyShareButton').style.display = 'block';
+}
+
+function copyShareLink() {
+    const text = document.getElementById('shareLinkOutput').textContent;
+    navigator.clipboard.writeText(text).then(() => alert('共有リンクがコピーされました！'));
+}
+
+function analyzeUnicode() {
+    const text = document.getElementById('unicodeInput').value;
+    const unicodeResultDiv = document.getElementById('unicodeResult');
+    let output = 'Unicode解析結果:<br>';
     
-    h1 {
-        font-size: 1.2em;
+    for (const char of text) {
+        const codePoint = char.codePointAt(0).toString(16).toUpperCase();
+        output += `${char} -> U+${codePoint}<br>`;
     }
 
-    p, .disclaimer {
-        font-size: 0.8em;
-    }
-
-    input, button {
-        padding: 8px;
-        font-size: 0.8em;
-    }
+    unicodeResultDiv.innerHTML = output;
 }
