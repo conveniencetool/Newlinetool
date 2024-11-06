@@ -39,9 +39,10 @@ function copyLink() {
 }
 
 function generateShareLink() {
-    const link = document.getElementById('shareLinkInput').value;
+    const shareContent = document.getElementById('shareLinkInput').value;
     const shareLinkDiv = document.getElementById('shareLinkOutput');
-    shareLinkDiv.innerHTML = `https://example.com/share?link=${encodeURIComponent(link)}`;
+    const shareUrl = `https://line.me/R/msg/text/${encodeURIComponent(shareContent)}`;
+    shareLinkDiv.innerHTML = shareUrl;
     document.getElementById('copyShareButton').style.display = 'block';
 }
 
